@@ -1,8 +1,7 @@
-package Service;
+package model.Service;
 
-import entity.Sala;
-import entity.Usuario;
-import repository.SalaRepository;
+import model.entity.Sala;
+import model.repository.SalaRepository;
 
 public class SalaService {
 

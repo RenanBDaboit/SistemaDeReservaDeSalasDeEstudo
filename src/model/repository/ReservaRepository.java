@@ -1,6 +1,6 @@
-package repository;
+package model.repository;
 
-import entity.Reserva;
+import model.entity.Reserva;
 
 import java.util.HashMap;
 

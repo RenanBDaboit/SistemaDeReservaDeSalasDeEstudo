@@ -1,9 +1,9 @@
-package Service;
+package model.Service;
 
-import entity.Reserva;
-import entity.Sala;
-import entity.Usuario;
-import repository.ReservaRepository;
+import model.entity.Reserva;
+import model.entity.Sala;
+import model.entity.Usuario;
+import model.repository.ReservaRepository;
 
 public class ReservaService {
 

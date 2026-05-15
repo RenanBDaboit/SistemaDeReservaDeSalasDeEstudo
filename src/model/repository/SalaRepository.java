@@ -1,6 +1,6 @@
-package repository;
+package model.repository;
 
-import entity.Sala;
+import model.entity.Sala;
 
 import java.util.HashMap;
 
