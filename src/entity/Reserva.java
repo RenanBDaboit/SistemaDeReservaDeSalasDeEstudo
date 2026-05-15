@@ -9,12 +9,12 @@ public class Reserva {
     private String horario;
     private String status;
 
-    public Reserva(int id, Usuario usuario, String data, String horario, String status, Sala sala) {
+    public Reserva(int id, Usuario usuario, String data, String horario, Sala sala) {
         this.id = id;
         this.usuario = usuario;
         this.data = data;
         this.horario = horario;
-        this.status = status;
+        this.status = "Ativo";
         this.sala = sala;
     }
 
