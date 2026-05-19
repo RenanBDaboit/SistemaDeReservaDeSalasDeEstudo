@@ -33,7 +33,15 @@ public class Usuario {
 
         public void setCpf (String cpf){
             this.cpf = cpf;
-
         }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", cpf='" + cpf + '\'' +
+                '}';
     }
+}
 

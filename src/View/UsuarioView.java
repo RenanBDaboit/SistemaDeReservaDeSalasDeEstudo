@@ -21,7 +21,7 @@ public class UsuarioView {
             System.out.println("| [1] Cadastrar Usuário               |");
             System.out.println("| [0] Sair                            |");
             System.out.println("+=====================================+");
-            System.out.println("Escolha uma opção: ");
+            System.out.print("Escolha uma opção: ");
             op = Integer.parseInt(sc.nextLine());
             
             switch (op){
@@ -40,16 +40,23 @@ public class UsuarioView {
     }
     
     private void cadastrarUsuario(){
-        System.out.println("Nome: ");
+        System.out.print("Nome: ");
         String nome = sc.nextLine();
 
-        System.out.println("ID: ");
-        int id = sc.nextInt();
-        sc.nextLine();
+        System.out.print("ID: ");
+        int id = Integer.parseInt(sc.nextLine());
 
-        System.out.println("CPF:");
-        int cpf = sc.nextInt();
-        
+        System.out.print("CPF:");
+        String cpf = sc.nextLine();
+
+        boolean sucesso = controller.cadastrar(id, nome, cpf);
+
+        if (sucesso) {
+            System.out.println("Usuário cadastrado com sucesso");
+        }
+        else {
+            System.out.println("Erro ao cadastrar usuário");
+        }
     }
     
 }

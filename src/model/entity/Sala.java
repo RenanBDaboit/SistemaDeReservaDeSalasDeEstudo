@@ -46,4 +46,13 @@ public class Sala {
         this.disponivel = disponivel;
     }
 
+    @Override
+    public String toString() {
+        return "Sala{" +
+                "id=" + id +
+                ", numero=" + numero +
+                ", capacidade=" + capacidade +
+                ", disponivel=" + disponivel +
+                '}';
+    }
 }
