@@ -19,7 +19,7 @@ public class ReservaRepository {
     public HashMap<Integer, Reserva> listar() {
         return reservas;
     }
-
+    
     public void remover(int id){
         reservas.remove(id);
     }
