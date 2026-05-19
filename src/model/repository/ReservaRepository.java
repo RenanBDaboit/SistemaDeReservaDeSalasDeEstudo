@@ -16,6 +16,10 @@ public class ReservaRepository {
         return reservas.get(id);
     }
 
+    public void atualizar(Reserva reserva){
+        reservas.replace(reserva.getId(), reserva);
+    }
+
     public HashMap<Integer, Reserva> listar() {
         return reservas;
     }

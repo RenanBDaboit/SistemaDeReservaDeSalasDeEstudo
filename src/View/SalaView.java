@@ -21,7 +21,7 @@ public class SalaView {
             System.out.println("| [1] Cadastrar Sala                  |");
             System.out.println("| [0] Sair                            |");
             System.out.println("+=====================================+");
-            System.out.println("Escolha uma opção: ");
+            System.out.print("Escolha uma opção: ");
             op = Integer.parseInt(sc.nextLine());
             
             switch (op){
@@ -41,16 +41,23 @@ public class SalaView {
     }
     
     private void cadastrarSala(){
-        System.out.println("ID: ");
-        int id = sc.nextInt();
-        sc.nextLine();
+        System.out.print("ID: ");
+        int id = Integer.parseInt(sc.nextLine());
 
-        System.out.println("Número da Sala: ");
-        int numSala = sc.nextInt();
-        sc.nextLine();
+        System.out.print("Número da Sala: ");
+        int numSala = Integer.parseInt(sc.nextLine());
 
-        System.out.println("Capacidade de alunos: ");
+        System.out.print("Capacidade de alunos: ");
         int cap = sc.nextInt();
         sc.nextLine();
+
+        boolean sucesso = controller.cadastrar(id, numSala, cap);
+
+        if (sucesso) {
+            System.out.println("Sala cadastrada com sucesso");
+        }
+        else {
+            System.out.println("Erro ao cadastrar sala");
+        }
     }
 }

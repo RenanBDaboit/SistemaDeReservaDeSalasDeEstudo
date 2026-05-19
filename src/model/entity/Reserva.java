@@ -66,4 +66,15 @@ public class Reserva {
         this.status = status;
     }
 
+    @Override
+    public String toString() {
+        return "Reserva{" +
+                "id=" + id +
+                ", usuario=" + usuario +
+                ", sala=" + sala +
+                ", data='" + data + '\'' +
+                ", horario='" + horario + '\'' +
+                ", status='" + status + '\'' +
+                '}';
+    }
 }

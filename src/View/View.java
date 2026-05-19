@@ -15,7 +15,7 @@ public class View {
     private final SalaRepository salaRepository = new SalaRepository();
     private final UsuarioRepository usuarioRepository = new UsuarioRepository();
     
-    private final ReservaController reservaController = new ReservaController(reservaRepository);
+    private final ReservaController reservaController = new ReservaController(reservaRepository, salaRepository, usuarioRepository);
     private final SalaController salaController = new SalaController(salaRepository);
     private final UsuarioController usuarioController = new UsuarioController(usuarioRepository);
 

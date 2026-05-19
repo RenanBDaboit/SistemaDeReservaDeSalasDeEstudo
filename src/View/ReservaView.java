@@ -7,6 +7,8 @@ import model.entity.Usuario;
 import model.repository.ReservaRepository;
 import model.repository.UsuarioRepository;
 import model.repository.SalaRepository;
+
+import java.util.Map;
 import java.util.Scanner;
 
 public class ReservaView {
@@ -36,7 +38,7 @@ public class ReservaView {
             System.out.println("| [4] Cancelar/Remover reserva        |");
             System.out.println("| [0] Sair                            |");
             System.out.println("+=====================================+");
-            System.out.println("Escolha uma opção: ");
+            System.out.print("Escolha uma opção: ");
             op = Integer.parseInt(sc.nextLine());
             
             switch (op){
@@ -53,7 +55,7 @@ public class ReservaView {
                 }
                 
                 case 4 ->{
-                    
+                    cancelarRemoverReserva();
                 }
                 
                 case 0 ->{
@@ -68,26 +70,31 @@ public class ReservaView {
     }
     
     private void fazerReserva(){
-        System.out.println("ID da reserva: ");
-        int id = sc.nextInt();
-        sc.nextLine();
+        System.out.print("ID da reserva: ");
+        int id = Integer.parseInt(sc.nextLine());
 
-        System.out.println("ID do usuário que vai fazer a reserva: ");
-        int idUsuario = sc.nextInt();
-        Usuario usuario = usuarioRepository.buscar(idUsuario);
+        listarUsuarios();
+        System.out.print("ID do usuário que vai fazer a reserva: ");
+        int idUsuario = Integer.parseInt(sc.nextLine());
 
-        System.out.println("Data da reserva (DD/MM/AAAA): ");
+        System.out.print("Data da reserva (DD/MM/AAAA): ");
         String data = sc.nextLine();
 
-        System.out.println("Horário da reserva: ");
+        System.out.print("Horário da reserva: ");
         String horario = sc.nextLine();
 
-        int idSala = sc.nextInt();
-        Sala sala = salaRepository.buscar(idSala);
+        listarSalas();
+        System.out.print("ID da sala que vai ser reservada: ");
+        int idSala = Integer.parseInt(sc.nextLine());
         
-        Reserva reserva = new Reserva(id, usuario, data, horario, sala);
-        reservaRepository.salvar(reserva);
-        System.out.println("Reserva feita com sucesso!");
+        boolean sucesso = controller.cadastrar(id, idUsuario, idSala, data, horario);
+
+        if (sucesso){
+            System.out.println("Reserva feita com sucesso!");
+        }
+        else {
+            System.out.println("Erro ao cadastrar reserva");
+        }
     }
     
     private void listarReservas(){
@@ -95,10 +102,24 @@ public class ReservaView {
             System.out.println(reserva);
         }
     }
+
+    private void listarUsuarios() {
+        for (Usuario usuario : controller.listarUsuarios().values()){
+            System.out.println(usuario);
+        }
+    }
+
+    private void listarSalas(){
+        for (Sala sala : controller.listarSalas().values()){
+            System.out.println(sala);
+        }
+    }
     
     private void atualizarReservas(){
-        System.out.println("ID da reserva que deseja atualizar: ");
-        int id = sc.nextInt();
+
+        listarReservas();
+        System.out.print("ID da reserva que deseja atualizar: ");
+        int id = Integer.parseInt(sc.nextLine());
         Reserva reserva = reservaRepository.buscar(id);
         
         if(reserva == null ){
@@ -106,17 +127,20 @@ public class ReservaView {
             return;
         }
 
-        System.out.println("Novo usuário: ");
-        int idUsuario = sc.nextInt();
+        listarUsuarios();
+        System.out.print("Novo usuário: ");
+        int idUsuario = Integer.parseInt(sc.nextLine());
         Usuario usuario = usuarioRepository.buscar(idUsuario);
 
-        System.out.println("Nova data (DD/MM/AAAA): ");
+        System.out.print("Nova data (DD/MM/AAAA): ");
         String data = sc.nextLine();
 
-        System.out.println("Novo horário: ");
+        System.out.print("Novo horário: ");
         String horario = sc.nextLine();
 
-        int idSala = sc.nextInt();
+        listarSalas();
+        System.out.print("ID da sala que vai ser reservada: ");
+        int idSala = Integer.parseInt(sc.nextLine());
         Sala sala = salaRepository.buscar(idSala);
 
         Reserva atualizar = new Reserva(id, usuario, data, horario, sala);
@@ -125,18 +149,26 @@ public class ReservaView {
     }
     
     private void cancelarRemoverReserva(){
-        System.out.println("ID da reserva que deseja remover: ");
-        int id = sc.nextInt();
+
+        listarReservas();
+        System.out.print("ID da reserva que deseja remover: ");
+        int id = Integer.parseInt(sc.nextLine());
         
         Reserva reserva = reservaRepository.buscar(id);
         
         if(reserva == null){
-            System.out.println("Reserva nao encontrada!");
+            System.out.println("Reserva não encontrada!");
             return;
         }
         
-        reservaRepository.remover(id);
-        System.out.println("Reserva removida com sucesso!");
+        boolean sucesso = controller.remover(id);
+
+        if (sucesso) {
+            System.out.println("Reserva removida com sucesso!");
+        }
+        else {
+            System.out.println("Erro ao remover reserva");
+        }
     }
     
 }
