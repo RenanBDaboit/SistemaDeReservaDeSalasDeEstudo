@@ -41,15 +41,32 @@ public class SalaView {
     }
     
     private void cadastrarSala(){
+        int id;
+        int numSala;
+        int cap;
+
         System.out.print("ID: ");
-        int id = Integer.parseInt(sc.nextLine());
+        try {
+            id = Integer.parseInt(sc.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Entre com um número");
+            id = -1;
+        }
 
         System.out.print("Número da Sala: ");
-        int numSala = Integer.parseInt(sc.nextLine());
-
+        try {
+            numSala = Integer.parseInt(sc.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Entre com um número");
+            numSala = -1;
+        }
         System.out.print("Capacidade de alunos: ");
-        int cap = sc.nextInt();
-        sc.nextLine();
+        try {
+            cap = Integer.parseInt(sc.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Entre com um número");
+            cap = -1;
+        }
 
         boolean sucesso = controller.cadastrar(id, numSala, cap);
 

@@ -22,30 +22,40 @@ public class UsuarioView {
             System.out.println("| [0] Sair                            |");
             System.out.println("+=====================================+");
             System.out.print("Escolha uma opção: ");
-            op = Integer.parseInt(sc.nextLine());
-            
-            switch (op){
-                case 1 ->{
-                    cadastrarUsuario();
+            try {
+                op = Integer.parseInt(sc.nextLine());
+                switch (op){
+                    case 1 ->{
+                        cadastrarUsuario();
+                    }
+                    case 0 ->{
+                        System.out.println("Saindo...");
+                    }
+
+                    default -> {
+                        System.out.println("Opção incorreta!");
+                    }
                 }
-                case 0 ->{
-                    System.out.println("Saindo...");
-                }
-                
-                default -> {
-                    System.out.println("Opção incorreta!");
-                }
+            } catch (NumberFormatException e) {
+                System.out.println("Entre com um número");
+                op = -1;
             }
         } while(op != 0);
     }
     
     private void cadastrarUsuario(){
+        int id;
+
         System.out.print("Nome: ");
         String nome = sc.nextLine();
 
         System.out.print("ID: ");
-        int id = Integer.parseInt(sc.nextLine());
-
+        try {
+            id = Integer.parseInt(sc.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Entre com um número");
+            id = -1;
+        }
         System.out.print("CPF:");
         String cpf = sc.nextLine();
 
