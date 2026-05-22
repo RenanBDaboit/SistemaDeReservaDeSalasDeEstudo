@@ -39,43 +39,63 @@ public class ReservaView {
             System.out.println("| [0] Sair                            |");
             System.out.println("+=====================================+");
             System.out.print("Escolha uma opção: ");
-            op = Integer.parseInt(sc.nextLine());
-            
-            switch (op){
-                case 1 ->{
-                    fazerReserva();
+            try {
+                op = Integer.parseInt(sc.nextLine());
+
+                switch (op) {
+                    case 1 -> {
+                        fazerReserva();
+                    }
+
+                    case 2 -> {
+                        listarReservas();
+                    }
+
+                    case 3 -> {
+                        atualizarReservas();
+                    }
+
+                    case 4 -> {
+                        cancelarRemoverReserva();
+                    }
+
+                    case 0 -> {
+                        System.out.println("Saindo...");
+                    }
+
+                    default -> {
+                        System.out.println("Opção incorreta");
+                    }
                 }
-                
-                case 2 ->{
-                    listarReservas();
-                }
-                
-                case 3 ->{
-                    atualizarReservas();
-                }
-                
-                case 4 ->{
-                    cancelarRemoverReserva();
-                }
-                
-                case 0 ->{
-                    System.out.println("Saindo...");
-                }
-                
-                default ->{
-                    System.out.println("Opção incorreta");
-                }
+            } catch (NumberFormatException n){
+                System.out.println("Apenas números");
+                op = -1;
             }
         } while(op != 0);
     }
     
     private void fazerReserva(){
+
+        int id;
+        int idUsuario;
+        int idSala;
+
         System.out.print("ID da reserva: ");
-        int id = Integer.parseInt(sc.nextLine());
+        try {
+            id = Integer.parseInt(sc.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Entre com um número");
+            id = -1;
+        }
 
         listarUsuarios();
         System.out.print("ID do usuário que vai fazer a reserva: ");
-        int idUsuario = Integer.parseInt(sc.nextLine());
+        try{
+            idUsuario = Integer.parseInt(sc.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Entre com um número");
+            idUsuario = -1;
+        }
 
         System.out.print("Data da reserva (DD/MM/AAAA): ");
         String data = sc.nextLine();
@@ -85,8 +105,13 @@ public class ReservaView {
 
         listarSalas();
         System.out.print("ID da sala que vai ser reservada: ");
-        int idSala = Integer.parseInt(sc.nextLine());
-        
+        try {
+            idSala = Integer.parseInt(sc.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Entre com um número");
+            idSala = -1;
+        }
+
         boolean sucesso = controller.cadastrar(id, idUsuario, idSala, data, horario);
 
         if (sucesso){
@@ -117,11 +142,20 @@ public class ReservaView {
     
     private void atualizarReservas(){
 
+        int id;
+        int idUsuario;
+        int idSala;
+
         listarReservas();
         System.out.print("ID da reserva que deseja atualizar: ");
-        int id = Integer.parseInt(sc.nextLine());
+        try {
+            id = Integer.parseInt(sc.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Entre com um número");
+            id = -1;
+        }
         Reserva reserva = reservaRepository.buscar(id);
-        
+
         if(reserva == null ){
             System.out.println("Reserva não encontrada!");
             return;
@@ -129,7 +163,12 @@ public class ReservaView {
 
         listarUsuarios();
         System.out.print("Novo usuário: ");
-        int idUsuario = Integer.parseInt(sc.nextLine());
+        try {
+            idUsuario = Integer.parseInt(sc.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Entre com um número");
+            idUsuario = -1;
+        }
         Usuario usuario = usuarioRepository.buscar(idUsuario);
 
         System.out.print("Nova data (DD/MM/AAAA): ");
@@ -140,7 +179,12 @@ public class ReservaView {
 
         listarSalas();
         System.out.print("ID da sala que vai ser reservada: ");
-        int idSala = Integer.parseInt(sc.nextLine());
+        try {
+            idSala = Integer.parseInt(sc.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Entre com um número");
+            idSala = -1;
+        }
         Sala sala = salaRepository.buscar(idSala);
 
         Reserva atualizar = new Reserva(id, usuario, data, horario, sala);
@@ -150,10 +194,16 @@ public class ReservaView {
     
     private void cancelarRemoverReserva(){
 
+        int id;
+
         listarReservas();
         System.out.print("ID da reserva que deseja remover: ");
-        int id = Integer.parseInt(sc.nextLine());
-        
+        try {
+            id = Integer.parseInt(sc.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Entre com um número");
+            id = -1;
+        }
         Reserva reserva = reservaRepository.buscar(id);
         
         if(reserva == null){

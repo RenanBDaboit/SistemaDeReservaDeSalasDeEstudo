@@ -35,28 +35,32 @@ public class View {
             System.out.println("| [0] Sair                            |");
             System.out.println("+=====================================+");
             System.out.print("Escolha uma opção: ");
-            op = Integer.parseInt(sc.nextLine());
-            
-            switch (op){
-                case 1 ->{
-                    reservaView.menuReserva();
+            try {
+                op = Integer.parseInt(sc.nextLine());
+                switch (op){
+                    case 1 ->{
+                        reservaView.menuReserva();
+                    }
+
+                    case 2 ->{
+                        salaView.menuSala();
+                    }
+
+                    case 3 ->{
+                        usuarioView.menuUsuario();
+                    }
+
+                    case 0 ->{
+                        System.out.println("Saindo...");
+                    }
+
+                    default -> {
+                        System.out.println("Opção incorreta!");
+                    }
                 }
-                
-                case 2 ->{
-                    salaView.menuSala();
-                }
-                
-                case 3 ->{
-                    usuarioView.menuUsuario();
-                }
-                
-                case 0 ->{
-                    System.out.println("Saindo...");
-                }
-                
-                default -> {
-                    System.out.println("Opção incorreta!");
-                }
+            } catch (NumberFormatException e) {
+                System.out.println("Entre com um número");
+                op = -1;
             }
         } while(op != 0);
     }
